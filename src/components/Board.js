@@ -1,28 +1,9 @@
 // This is the game board component
 
-import React, { useState } from 'react';
+import React from 'react';
 import Square from './Square';
 
-const Board = () => {
-
-    const [board, setBoard] = useState(Array(9).fill(null));
-    const [isNext, setIsnext] = useState(false);
-
-    const handleSquareClick = (position) => {
-        if (board[position]){
-            return;
-        }
-        setBoard(prev => {
-            return prev.map((square, pos) => {
-                if (pos == position){
-                    return isNext ? "X" : "O";
-                }
-                return square;
-            })
-        })
-
-        setIsnext(prev => !prev);
-    };
+const Board = ({board, handleSquareClick}) => {
 
     const renderSquare = position => {
         return (
@@ -30,7 +11,7 @@ const Board = () => {
                 value = {board[position]}
                 onClick = {() => handleSquareClick(position)}
             />
-        )
+        );
     };
 
     return (
